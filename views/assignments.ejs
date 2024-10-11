@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/assignments.css" />
+    <title>Assignment Submissions</title>
+  </head>
+  <body>
+    <h2>Assignment Submission Status</h2>
+
+    <div class="status-container">
+      <% if (typeof owner !== 'undefined') { %> <% if (assignment.length > 0) {
+      %> <% assignment.forEach((assign) => { %>
+      <div class="assignment-details">
+        <p>Submitted By: <strong><%= assign.user_id %></strong></p>
+        <p>Task: <strong><%= assign.task %></strong></p>
+        <p>Status: <strong><%= assign.status %></strong></p>
+        <p>Admin: <strong><%= assign.admin %></strong></p>
+        <p>Submission Date: <strong><%= assign.submission_date %></strong></p>
+
+        <div class="assignment-actions">
+          <button onclick="updateStatus('<%= assign.id %>', 'accept')">
+            Accept
+          </button>
+          <button onclick="updateStatus('<%= assign.id %>', 'reject')">
+            Reject
+          </button>
+        </div>
+      </div>
+      <hr />
+      <% }); %> <% } else { %>
+      <p>No assignments found.</p>
+      <% } %> <% } else { %>
+      <p class="error-message">
+        Owner is not defined. Please ensure you are logged in to view this
+        information.
+      </p>
+      <% } %>
+    </div>
+
+    <script>
+      // JavaScript to handle assignment status update
+      function updateStatus(assignmentId, action) {
+        const url = `/assignments/${assignmentId}/${action}`;
+        fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.success) {
+              alert("Assignment " + action + "ed successfully.");
+              window.location.reload(); // Reload the page to reflect the updated status
+            } else {
+              alert("Error " + action + "ing assignment.");
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+    </script>
+  </body>
+</html>

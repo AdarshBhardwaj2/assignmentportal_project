@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/login.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="box">
+      <div class="loginBox">
+        <h2>SignUp</h2>
+      </div>
+
+      <form
+        action="/check-user-signin"
+        method="POST"
+        onsubmit="return validateForm()"
+      >
+        <p>Username:</p>
+        <input type="text" id="username" name="username" required />
+
+        <p>Password:</p>
+        <input type="password" id="password" name="password" required />
+        <p>Confirm Password:</p>
+        <input
+          type="password"
+          id="confirmPassword"
+          name="confirmPassword"
+          required
+        /><br /><br />
+
+        <div class="dropdown-container">
+          <select name="type" id="type" required>
+            <option value="" disabled selected>Select Type</option>
+            <option value="User">User</option>
+            <option value="Admin">Admin</option>
+          </select>
+        </div>
+        <br /><br /><br />
+
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <script>
+      // Function to validate matching passwords
+      function validateForm() {
+        const password = document.getElementById("password").value;
+        const confirmPassword =
+          document.getElementById("confirmPassword").value;
+
+        if (password !== confirmPassword) {
+          alert("Passwords do not match. Please try again.");
+          return false; // Prevent form submission
+        }
+
+        return true; // Allow form submission if passwords match
+      }
+    </script>
+  </body>
+</html>

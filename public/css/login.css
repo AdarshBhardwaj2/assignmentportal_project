@@ -1,0 +1,120 @@
+/* Reset some default browser styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(
+    135deg,
+    #f5f7fa,
+    #c3cfe2
+  ); /* Gradient background */
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  text-align: center;
+}
+
+/* Main container styles */
+.box {
+  background-color: #ffffff; /* White background for the box */
+  padding: 40px 30px; /* Vertical and horizontal padding */
+  border-radius: 15px; /* Rounded corners */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  width: 100%;
+  max-width: 450px; /* Limit the width for larger screens */
+  transition: transform 0.3s ease; /* Smooth transform */
+}
+
+.box:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-size: 2rem; /* Size of the heading */
+  font-weight: 600; /* Medium weight */
+  color: #007bff; /* Brand color */
+  letter-spacing: 1px; /* Spacing between letters */
+}
+
+/* Input Fields */
+input[type="text"],
+input[type="password"],
+select {
+  width: 100%; /* Full width for inputs */
+  padding: 15px 20px; /* Padding for comfort */
+  margin: 10px 0; /* Spacing between fields */
+  border: 1px solid #ddd; /* Light border */
+  border-radius: 10px; /* Rounded edges */
+  font-size: 1rem; /* Font size */
+  transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition */
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+select:focus {
+  border-color: #007bff; /* Blue border on focus */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Focus shadow */
+  outline: none; /* Remove default outline */
+}
+
+p {
+  text-align: left; /* Align labels to the left */
+  font-weight: 500; /* Medium weight for labels */
+}
+
+/* Dropdown Container */
+.dropdown-container {
+  position: relative; /* Position relative for dropdown styling */
+}
+
+select {
+  cursor: pointer; /* Change cursor to pointer */
+}
+
+/* Submit Button */
+button {
+  width: 100%; /* Full width */
+  padding: 15px; /* Padding for comfort */
+  background-color: #007bff; /* Primary button color */
+  color: #ffffff; /* White text color */
+  border: none; /* Remove border */
+  border-radius: 10px; /* Rounded corners */
+  font-size: 1.1rem; /* Button font size */
+  font-weight: 600; /* Button font weight */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s; /* Transition effects */
+}
+
+button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: translateY(-2px); /* Lift effect on hover */
+  box-shadow: 0 4px 15px rgba(0, 86, 179, 0.3); /* Shadow on hover */
+}
+
+/* Error Message */
+p[style="color: red"] {
+  margin: 10px 0; /* Margin for error messages */
+  font-weight: bold; /* Bold for emphasis */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  h2 {
+    font-size: 1.6rem; /* Smaller font size for mobile */
+  }
+
+  .box {
+    padding: 30px; /* Reduced padding for smaller screens */
+  }
+
+  button {
+    font-size: 1rem; /* Smaller button text */
+  }
+}

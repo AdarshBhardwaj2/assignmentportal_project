@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/student.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="box">
+      <h2>Hello <%= studentName %></h2>
+      <button class="submit" type="button" onclick="toggleDropdown()">
+        Submit Assignment
+      </button>
+
+      <form action="/upload" method="POST" id="assignmentForm">
+        <div class="dropdown" id="dropdown" style="display: none">
+          <!-- Initially hidden -->
+          <div class="form-group">
+            <label for="userId">User ID:</label>
+            <input
+              type="text"
+              id="userId"
+              name="userId"
+              value="<%= studentName %>"
+              required
+              readonly
+            />
+          </div>
+          <div class="form-group">
+            <label for="task">Task:</label>
+            <textarea id="task" name="task" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="admin">Admin:</label>
+            <select id="admin" name="admin" required>
+              <option value="">--Choose an Admin--</option>
+              <% adminName.forEach(admin => { %>
+              <option value="<%= admin.username %>">
+                <%= admin.username %>
+              </option>
+              <% }) %>
+            </select>
+          </div>
+          <button type="submit" id="submitButton" style="display: none">
+            Submit
+          </button>
+        </div>
+        <!-- Submit button moved outside the dropdown -->
+      </form>
+
+      <form action="/admins" method="GET">
+        <button class="getAdmin" type="submit">View Admins</button>
+      </form>
+    </div>
+
+    <script>
+      function toggleDropdown() {
+        const dropdown = document.getElementById("dropdown");
+        const submitButton = document.getElementById("submitButton");
+        const isVisible = dropdown.style.display === "block";
+        dropdown.style.display = isVisible ? "none" : "block"; // Toggle dropdown visibility
+        submitButton.style.display = isVisible ? "none" : "block"; // Show/Hide submit button based on dropdown visibility
+      }
+
+      // Close the dropdown if the user clicks outside of it
+      window.onclick = function (event) {
+        const dropdown = document.getElementById("dropdown");
+        const submitButton = document.getElementById("submitButton");
+        if (
+          !event.target.matches(".submit") &&
+          !dropdown.contains(event.target)
+        ) {
+          dropdown.style.display = "none"; // Hide dropdown
+          submitButton.style.display = "none"; // Hide submit button
+        }
+      };
+    </script>
+  </body>
+</html>

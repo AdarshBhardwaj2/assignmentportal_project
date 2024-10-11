@@ -1,0 +1,137 @@
+/* Base styles */
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f9; /* Light background for contrast */
+}
+
+/* Container for the box */
+.box {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 500px; /* Limit max width for better layout */
+  margin: 40px auto; /* Center the box */
+  text-align: center; /* Center align text */
+}
+
+/* Heading style */
+h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Button styles */
+.submit,
+.getAdmin {
+  width: 15vw;
+  background-color: #4a90e2; /* Main button color */
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px; /* Larger font for better readability */
+  transition: background-color 0.3s ease; /* Smooth transition */
+  margin: 10px; /* Add margin between buttons */
+}
+
+.submit:hover,
+.getAdmin:hover {
+  background-color: #357abd; /* Darker shade on hover */
+}
+
+/* Dropdown container */
+.dropdown {
+  background-color: #ffffff; /* White background for dropdown */
+  border: 1px solid #ddd; /* Light border for dropdown */
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-top: 10px; /* Space between button and dropdown */
+}
+
+/* Form group styles */
+.form-group {
+  margin-bottom: 15px;
+  text-align: left; /* Left align labels */
+}
+
+/* Label styles */
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333; /* Darker label color for contrast */
+}
+
+/* Input styles */
+input[type="text"],
+textarea,
+select {
+  width: 100%; /* Full width */
+  padding: 10px;
+  border: 1px solid #ccc; /* Light border for inputs */
+  border-radius: 4px;
+  transition: border-color 0.3s ease; /* Transition for border on focus */
+}
+
+input[type="text"]:focus,
+textarea:focus,
+select:focus {
+  border-color: #4a90e2; /* Focus border color */
+  outline: none; /* Remove outline */
+}
+
+/* Textarea specific styles */
+textarea {
+  height: 80px; /* Fixed height for textarea */
+  resize: none; /* Disable resize */
+}
+
+/* Dropdown select styles */
+select {
+  appearance: none; /* Remove default dropdown arrow */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><polygon fill="%234a90e2" points="0,0 20,0 10,10 "/></svg>'); /* Custom dropdown arrow */
+  background-repeat: no-repeat;
+  background-position: right 10px center; /* Position custom arrow */
+  background-size: 12px; /* Size of custom arrow */
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .box {
+    padding: 15px; /* Reduced padding on smaller screens */
+  }
+
+  .submit,
+  .getAdmin {
+    width: 100%; /* Full width buttons on small screens */
+  }
+}
+#submitButton {
+  display: none; /* Initially hidden */
+  background-color: #4caf50; /* Green background */
+  color: white; /* White text */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 12px 20px; /* Padding for a better size */
+  font-size: 16px; /* Font size */
+  cursor: pointer; /* Change cursor to pointer */
+  transition: background-color 0.3s, transform 0.3s; /* Transition effects */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+}
+
+/* Hover effect */
+#submitButton:hover {
+  background-color: #45a049; /* Darker green on hover */
+  transform: translateY(-2px); /* Slight lift effect */
+}
+
+/* Active effect */
+#submitButton:active {
+  transform: translateY(0); /* Reset lift effect */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduce shadow when pressed */
+}

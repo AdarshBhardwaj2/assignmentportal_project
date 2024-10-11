@@ -1,0 +1,106 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Arial", sans-serif; /* Modern font */
+  background-color: #f4f7fa; /* Light background for contrast */
+  color: #333; /* Dark text for readability */
+  line-height: 1.6; /* Increased line height */
+}
+
+.container {
+  max-width: 800px; /* Max width for the container */
+  margin: 50px auto; /* Center the container with margin */
+  padding: 30px; /* Padding inside the container */
+  background-color: #ffffff; /* White background for the content */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+h1 {
+  text-align: center; /* Centered heading */
+  font-size: 2.5rem; /* Large font size for heading */
+  color: #2c3e50; /* Darker color for the heading */
+  margin-bottom: 20px; /* Space below the heading */
+  position: sticky; /* Sticky positioning */
+  top: 0; /* Stick to the top */
+  background-color: #ffffff; /* Match background with the container */
+  padding: 10px 0; /* Padding for the heading */
+  z-index: 10; /* Ensure it stays above other elements */
+  border-bottom: 2px solid #007bff; /* Blue border for emphasis */
+}
+
+ul {
+  list-style: none; /* Remove default list styling */
+  padding: 0; /* Remove default padding */
+}
+
+li {
+  padding: 15px; /* Padding for each list item */
+  margin: 10px 0; /* Margin between list items */
+  border-radius: 8px; /* Rounded corners for list items */
+  background-color: #f8f9fa; /* Light background for list items */
+  border: 1px solid #e0e0e0; /* Light border for items */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effects */
+  cursor: pointer; /* Pointer cursor on hover */
+  font-size: 1.2rem; /* Font size for list items */
+  text-align: center;
+}
+
+li:hover {
+  transform: translateY(-2px); /* Slight upward movement on hover */
+  box-shadow: 0 4px 20px rgba(0, 123, 255, 0.2); /* Shadow effect on hover */
+  background-color: #e1f5fe; /* Light blue background on hover */
+}
+button {
+  width: 20vw;
+  margin: 6px;
+  background-color: #4caf50; /* Green background */
+  color: white; /* White text */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px 20px; /* Padding for button */
+  font-size: 16px; /* Font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Transition for hover effect */
+}
+a {
+  display: inline-block; /* Make the anchor behave like a button */
+  padding: 10px 20px; /* Add padding for the button look */
+  background-color: #007bff; /* Button background color */
+  color: white; /* Button text color */
+  text-align: center; /* Center the text within the button */
+  text-decoration: none; /* Remove underline */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 16px; /* Font size for the text */
+  font-family: Arial, sans-serif; /* Font style */
+  transition: background-color 0.3s ease; /* Add a hover transition */
+  margin: 20px auto; /* Center horizontally and add vertical margin */
+}
+
+a:hover {
+  background-color: #0056b3; /* Darker background on hover */
+}
+
+/* Center the anchor tag within its parent */
+.link-container {
+  display: flex;
+  justify-content: center;
+}
+
+button:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 600px) {
+  .container {
+    padding: 20px; /* Reduce padding for smaller screens */
+  }
+  h1 {
+    font-size: 2rem; /* Slightly smaller heading on small screens */
+  }
+}

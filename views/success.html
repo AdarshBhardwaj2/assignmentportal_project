@@ -1,0 +1,59 @@
+<!-- views/success.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignment Submission Success</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: #f4f4f4;
+        padding: 20px;
+      }
+      .container {
+        background-color: #ffffff;
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        display: inline-block;
+      }
+      h1 {
+        color: #2ecc71;
+      }
+      p {
+        font-size: 18px;
+        margin: 10px 0;
+      }
+      .info {
+        font-weight: bold;
+        color: #3498db;
+      }
+      .footer {
+        margin-top: 20px;
+        color: #999999;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🎉 Success! 🎉</h1>
+      <p>Your assignment has been successfully submitted!</p>
+      <p>
+        <strong>Assignment ID:</strong>
+        <span class="info" id="assignmentId"></span>
+      </p>
+      <p><strong>User ID:</strong> <span class="info" id="userId"></span></p>
+      <p>
+        <strong>Submission Date:</strong>
+        <span class="info" id="submissionDate"></span>
+      </p>
+      <p><strong>Status:</strong> <span class="info" id="status"></span></p>
+      <p class="footer">
+        Thank you for your submission. We will review it shortly.
+      </p>
+    </div>
+  </body>
+</html>

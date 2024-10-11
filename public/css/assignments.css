@@ -1,0 +1,58 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+h2 {
+  color: #333;
+}
+.status-container {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.status-container p {
+  margin: 10px 0;
+}
+.error-message {
+  color: red;
+}
+.success-message {
+  color: green;
+}
+.assignment-actions {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+button {
+  background: linear-gradient(135deg, #6e8efb, #a777e3); /* Gradient color */
+  border: none;
+  width: 40%;
+  border-radius: 25px; /* Rounded corners */
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  transition: all 0.3s ease;
+  letter-spacing: 1px;
+}
+
+button:hover {
+  background: linear-gradient(
+    135deg,
+    #a777e3,
+    #6e8efb
+  ); /* Reverse gradient on hover */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+  transform: translateY(-3px); /* Slight lift effect */
+}
+
+button:active {
+  transform: translateY(1px); /* Slightly sink when clicked */
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); /* Reduced shadow when clicked */
+}
