@@ -1,16 +1,16 @@
 // importing all modules
 import express from "express";
 import bodyParser from "body-parser";
-import pg from "pg";
+
 import bcrypt from "bcryptjs";
 import path from "path";
 import { fileURLToPath } from "url";
 import pkg from "pg";
 
 const app = express();
-const port = process.env.PORT || 3001; // Use PORT from environment, fallback to 3000 for local dev
+const port = 3000; // Use PORT from environment, fallback to 3000 for local dev
 // const port = 3001; // Use PORT from environment, fallback to 3000 for local dev
-//databse connectivity
+
 const { Client } = pkg;
 const saltRounds = 10;
 
@@ -25,23 +25,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 // Check if we are in a production environment
-const isProduction = process.env.NODE_ENV === "production";
+// const isProduction = process.env.NODE_ENV === "production";
 
-// Create a new client based on the environment
-const client = isProduction
-  ? new Client({
-      connectionString: process.env.DATABASE_URL,
-      ssl: {
-        rejectUnauthorized: false,
-      },
-    })
-  : new Client({
-      user: "postgres",
-      host: "localhost",
-      database: "homework",
-      password: "Postgres@123",
-      port: 5432,
-    });
+//databse connectivity
+const client = new Client({
+  user: "postgres",
+  host: "localhost",
+  database: "homework",
+  password: "Postgres@123",
+  port: 5432,
+});
 client.connect();
 
 // Connect to the database asynchronously
@@ -54,8 +47,7 @@ const connectToDatabase = async () => {
   }
 };
 
-export { client, connectToDatabase };
-console.log("Database connection status:", client);
+//console.log("Database connection status:", client);
 
 //Home Page
 app.get("/", (req, res) => {
