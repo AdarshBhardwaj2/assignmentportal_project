@@ -9,7 +9,6 @@ import pkg from "pg";
 
 const app = express();
 const port = 3000; // Use PORT from environment, fallback to 3000 for local dev
-// const port = 3001; // Use PORT from environment, fallback to 3000 for local dev
 
 const { Client } = pkg;
 const saltRounds = 10;
@@ -187,7 +186,9 @@ app.get("/admins", async (req, res) => {
       // Rendering the admin list page and pass the fetched admins
       res.render("admin.ejs", { list: result.rows, owner });
     } else {
-      res.status(404).json({ message: "No admins found." });
+      return res
+        .status(401)
+        .sendFile(path.join(__dirname, "views", "noAdmin.html"));
     }
   } catch (error) {
     console.error("Error fetching admins:", error);
