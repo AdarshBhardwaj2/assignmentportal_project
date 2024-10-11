@@ -2,7 +2,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import pg from "pg";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -21,14 +21,38 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 //databse connectivity
-const db = new pg.Client({
-  user: "postgres",
-  host: "localhost",
-  database: "homework",
-  password: "Postgres@123",
-  port: 5432,
-});
-db.connect();
+import { Client } from "pg";
+
+// Check if we are in a production environment
+const isProduction = process.env.NODE_ENV === "production";
+
+// Create a new client based on the environment
+const client = isProduction
+  ? new Client({
+      connectionString: process.env.DATABASE_URL,
+      ssl: {
+        rejectUnauthorized: false,
+      },
+    })
+  : new Client({
+      user: "postgres",
+      host: "localhost",
+      database: "homework",
+      password: "Postgres@123",
+      port: 5432,
+    });
+
+// Connect to the database asynchronously
+const connectToDatabase = async () => {
+  try {
+    await client.connect();
+    console.log("Database connected successfully");
+  } catch (error) {
+    console.error("Database connection error:", error.stack);
+  }
+};
+
+export { client, connectToDatabase };
 
 //Home Page
 app.get("/", (req, res) => {
