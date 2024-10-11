@@ -5,10 +5,13 @@ import pg from "pg";
 import bcrypt from "bcryptjs";
 import path from "path";
 import { fileURLToPath } from "url";
+import pkg from "pg";
 
 const app = express();
-const port = process.env.PORT || 3000; // Use PORT from environment, fallback to 3000 for local dev
-
+const port = process.env.PORT || 3001; // Use PORT from environment, fallback to 3000 for local dev
+// const port = 3001; // Use PORT from environment, fallback to 3000 for local dev
+//databse connectivity
+const { Client } = pkg;
 const saltRounds = 10;
 
 // defining a variable owner to set its value to admin name while login to check for assignment for that particular admin
@@ -20,10 +23,6 @@ const __dirname = path.dirname(__filename);
 //middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
-
-//databse connectivity
-import pkg from "pg";
-const { Client } = pkg;
 
 // Check if we are in a production environment
 const isProduction = process.env.NODE_ENV === "production";
@@ -43,6 +42,7 @@ const client = isProduction
       password: "Postgres@123",
       port: 5432,
     });
+client.connect();
 
 // Connect to the database asynchronously
 const connectToDatabase = async () => {
@@ -55,6 +55,7 @@ const connectToDatabase = async () => {
 };
 
 export { client, connectToDatabase };
+console.log("Database connection status:", client);
 
 //Home Page
 app.get("/", (req, res) => {
@@ -67,6 +68,7 @@ app.post("/login", (req, res) => {
 });
 
 app.post("/check-user-login", async (req, res) => {
+  console.log("Login attempt received:", req.body);
   const { username, password, type } = req.body;
 
   try {
