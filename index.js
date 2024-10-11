@@ -7,7 +7,8 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000; // Use PORT from environment, fallback to 3000 for local dev
+
 const saltRounds = 10;
 
 // defining a variable owner to set its value to admin name while login to check for assignment for that particular admin
@@ -21,7 +22,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 //databse connectivity
-import { Client } from "pg";
+import pkg from "pg";
+const { Client } = pkg;
 
 // Check if we are in a production environment
 const isProduction = process.env.NODE_ENV === "production";
@@ -68,9 +70,10 @@ app.post("/check-user-login", async (req, res) => {
   const { username, password, type } = req.body;
 
   try {
-    const result = await db.query("SELECT * FROM users WHERE username = $1", [
-      username,
-    ]);
+    const result = await client.query(
+      "SELECT * FROM users WHERE username = $1",
+      [username]
+    );
 
     //returning login fail if a user doesnot exist
     if (result.rows.length === 0) {
@@ -92,7 +95,7 @@ app.post("/check-user-login", async (req, res) => {
         .sendFile(path.join(__dirname, "views", "loginFail.html"));
     }
     //getting all admins
-    const adminList = await db.query("Select * from users where role=$1", [
+    const adminList = await client.query("Select * from users where role=$1", [
       "Admin",
     ]);
     const adminName = adminList.rows;
@@ -127,9 +130,10 @@ app.post("/check-user-signin", async (req, res) => {
 
   try {
     //checking if the username already exist
-    const checkAdmin = await db.query("Select * from users where username=$1", [
-      username,
-    ]);
+    const checkAdmin = await client.query(
+      "Select * from users where username=$1",
+      [username]
+    );
     if (checkAdmin.rows.length > 0) {
       return res
         .status(201)
@@ -146,7 +150,7 @@ app.post("/check-user-signin", async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Insert data into the users table
-    const result = await db.query(
+    const result = await client.query(
       "INSERT INTO users (username, password, role) VALUES ($1, $2, $3) RETURNING *",
       [username, hashedPassword, type]
     );
@@ -178,7 +182,7 @@ app.get("/admins", async (req, res) => {
   try {
     const role = "Admin"; // Specifying the role you're looking for
     //selecting all admins from the database
-    const result = await db.query(
+    const result = await client.query(
       "SELECT username FROM users WHERE role = $1",
       [role]
     );
@@ -214,7 +218,7 @@ app.post("/upload", async (req, res) => {
   try {
     // Inserting the assignment into the database
     const isoDate = submissionDate.toISOString();
-    const result = await db.query(
+    const result = await client.query(
       "INSERT INTO assignment (user_id, task, admin, status,submission_date) VALUES ($1, $2, $3, $4,$5) RETURNING *",
       [userId, task, admin, "pending", isoDate]
     );
@@ -242,7 +246,7 @@ app.get("/assignments", async (req, res) => {
       return res.status(401).json({ error: "Unauthorized access." }); // Handle unauthorized access
     }
     //Fetching assignments where the admin matches the specified owner
-    const assignment = await db.query(
+    const assignment = await client.query(
       "SELECT * FROM assignment WHERE admin = $1",
       [owner]
     );
@@ -265,9 +269,10 @@ app.post("/assignments/:id/accept", async (req, res) => {
   const assignmentId = req.params.id;
   try {
     //changing the status
-    await db.query("UPDATE assignment SET status = 'accepted' WHERE id = $1", [
-      assignmentId,
-    ]);
+    await client.query(
+      "UPDATE assignment SET status = 'accepted' WHERE id = $1",
+      [assignmentId]
+    );
     res.json({ success: true, message: "Assignment accepted" });
   } catch (error) {
     console.error("Error accepting assignment:", error);
@@ -282,9 +287,10 @@ app.post("/assignments/:id/reject", async (req, res) => {
   const assignmentId = req.params.id;
   try {
     //changing the status
-    await db.query("UPDATE assignment SET status = 'rejected' WHERE id = $1", [
-      assignmentId,
-    ]);
+    await client.query(
+      "UPDATE assignment SET status = 'rejected' WHERE id = $1",
+      [assignmentId]
+    );
     res.json({ success: true, message: "Assignment rejected" });
   } catch (error) {
     console.error("Error rejecting assignment:", error);
